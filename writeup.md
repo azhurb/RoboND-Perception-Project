@@ -23,7 +23,7 @@
 
 ### Pick and Place Setup
 
-#### For all three tabletop setups (`test*.world`), performed object recognition. then read in respective pick list (`pick_list_*.yaml`). Next construct the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
+#### For all three tabletop setups (`test*.world`), performed object recognition. Then read in respective pick list (`pick_list_*.yaml`). Next constructed the messages that would comprise a valid `PickPlace` request output them to `.yaml` format.
 
 ##### World 1
 Correctly identified 100% of objects (**3/3**). Saved PickPlace requests in the `pr2_robot/scripts/output_1.yaml`.
@@ -45,7 +45,14 @@ I had some problems with Statistical Outlier Filtering. It was not possible to c
 ```python
 outlier_filter = cloud.make_statistical_outlier_filter()
 ```
-I keep getting an error: `TypeError: __cinit__() takes exactly 1 positional argument (0 given)`
-I tried to find a solution for many hours. The next day in the Slack channel I saw that it was a problem with `pcl`. I pulled out updated from the upstream git, reinstall pcl and problem was solved!
+I keep getting an error:  
+`TypeError: __cinit__() takes exactly 1 positional argument (0 given)`
+
+I tried to find a solution for many hours. The next day on the Slack channel I saw that it was a problem with `pcl`. I pulled out updated from the upstream git, reinstall pcl and problem was solved!
+
+The next problem I got trying to save `yaml` file. I keep getting an error:  
+`TypeError: data type not understood`
+After some investigation it turned out that some elements of the dictionary had specific types - `numpy` types. For instance `object_name` element in the dictionary have `numpy.string_` type. Therefore, I had to perform type casting for each element of the dictionary using `int()`, `str()` and `float()` functions. I also published a solution of the problem on the Slack #udacity_perception channel.
+
 
 
