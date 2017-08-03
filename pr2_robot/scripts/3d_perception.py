@@ -53,8 +53,21 @@ def pcl_callback(pcl_msg):
 
     # TODO: Convert ROS msg to PCL data
     cloud = ros_to_pcl(pcl_msg)
-    # TODO: Voxel Grid Downsampling
 
+    # TODO: Statistical Outlier Filtering
+    # Much like the previous filters, we start by creating a filter object: 
+    outlier_filter = cloud.make_statistical_outlier_filter()
+
+    # Set the number of neighboring points to analyze for any given point
+    outlier_filter.set_mean_k(10)
+
+    # Any point with a mean distance larger than global (mean distance+x*std_dev) will be considered outlier
+    outlier_filter.set_std_dev_mul_thresh(0.001)
+
+    # Finally call the filter function for magic
+    cloud = outlier_filter.filter()
+
+    # TODO: Voxel Grid Downsampling
     # Create a VoxelGrid filter object for our input point cloud
     vox = cloud.make_voxel_grid_filter()
     # Set the voxel (or leaf) size..
@@ -118,19 +131,6 @@ def pcl_callback(pcl_msg):
 
     # TODO: Euclidean Clustering
     white_cloud = XYZRGB_to_XYZ(cloud_objects)# Apply function to convert XYZRGB to XYZ
-    
-    # Much like the previous filters, we start by creating a filter object: 
-    outlier_filter = white_cloud.make_statistical_outlier_filter()
-
-    # Set the number of neighboring points to analyze for any given point
-    outlier_filter.set_mean_k(10)
-
-    # Any point with a mean distance larger than global (mean distance+x*std_dev) will be considered outlier
-    outlier_filter.set_std_dev_mul_thresh(0.001)
-
-    # Finally call the filter function for magic
-    white_cloud = outlier_filter.filter()
-
     tree = white_cloud.make_kdtree()
 
     # TODO: Create Cluster-Mask Point Cloud to visualize each cluster separately
