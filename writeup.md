@@ -1,9 +1,5 @@
 ## Project: Perception Pick & Place
 
----
-
-[//]: # (Image References)
-
 [confusion_matrix]: ./images/figure_2.png
 [world_1]: ./images/world_1.png
 [world_2]: ./images/world_2.png
