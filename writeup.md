@@ -51,7 +51,7 @@ I keep getting an error:
 I tried to find a solution for many hours. The next day on the Slack channel I saw that it was a problem with `pcl`. I pulled out updated from the upstream git, reinstall pcl and problem was solved!
 
 The next problem I got trying to save `yaml` file. I keep getting an error:  
-`TypeError: data type not understood`
+`TypeError: data type not understood`  
 After some investigation it turned out that some elements of the dictionary had specific types - `numpy` types. For instance `object_name` element in the dictionary have `numpy.string_` type. Therefore, I had to perform type casting for each element of the dictionary using `int()`, `str()` and `float()` functions. I also published a solution of the problem on the Slack #udacity_perception channel.
 
 
