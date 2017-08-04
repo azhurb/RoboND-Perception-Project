@@ -1,6 +1,7 @@
 ## Project: Perception Pick & Place
 
 [confusion_matrix]: ./images/figure_2.png
+[cluster]: ./images/cluster.png
 [world_1]: ./images/world_1.png
 [world_2]: ./images/world_2.png
 [world_3]: ./images/world_3.png
@@ -14,6 +15,8 @@
 
 #### 2. Pipeline including clustering for segmentation implemented.
 * Implemented **Euclidean Clustering** using _cluster tolerance_ equal to `0.05`, _minimum cluster size_ equal to `50` and _maximum cluster size_ equal to `20000`.
+
+![Clustering][cluster]
 
 #### 3. Features extracted and SVM trained. Object recognition implemented.
 * Extracted features using `capture_features.py`. I used HSV for compute color histograms. The number of spawns of each object is 50.
