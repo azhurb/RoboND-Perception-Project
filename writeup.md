@@ -44,18 +44,21 @@ Correctly identified 87.5% of objects (**7/8**). The _glue_ was incorrectly reco
 ![World 3][world_3]
 
 ### Code discussion
-I had some problems with Statistical Outlier Filtering. It was not possible to create an object.
+I had some problems with _Statistical Outlier Filtering_. It was not possible to create an instance of filter object.
+
 ```python
 outlier_filter = cloud.make_statistical_outlier_filter()
 ```
+
 I keep getting an error:  
+
 `TypeError: __cinit__() takes exactly 1 positional argument (0 given)`
 
-I tried to find a solution for many hours. The next day on the Slack channel I saw that it was a problem with `pcl`. I pulled out updated from the upstream git, reinstall pcl and problem was solved!
+I tried to find a solution for many hours. The next day on the Slack channel I saw that it was a problem with `pcl` library. I pulled out updates from the upstream git, reinstall `pcl` and problem was solved!
 
 The next problem I got trying to save `yaml` file. I keep getting an error:  
 `TypeError: data type not understood`  
-After some investigation it turned out that some elements of the dictionary had specific types - `numpy` types. For instance `object_name` element in the dictionary have `numpy.string_` type. Therefore, I had to perform type casting for each element of the dictionary using `int()`, `str()` and `float()` functions. I also published a solution of the problem on the Slack #udacity_perception channel.
+After some investigation it turned out that some elements of the dictionary had specific types - `numpy` types. For instance `object_name` element in the dictionary has `numpy.string_` type. Therefore, I had to perform type casting for each element of the dictionary using `int()`, `str()` and `float()` functions. I also published a solution of the problem on the Slack #udacity_perception channel.
 
 
 
